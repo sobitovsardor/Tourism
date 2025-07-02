@@ -1,6 +1,4 @@
-﻿using System.Net;
-
-namespace Tourism.Api.Common.Exceptions;
+﻿namespace Tourism.Api.Common.Exceptions;
 
 public class StatusCodeException : Exception
 {

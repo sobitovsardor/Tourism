@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Net;
 using Tourism.Api.Common.DbContexts;
 using Tourism.Api.Common.Exceptions;
 using Tourism.Api.Common.Security;
@@ -30,13 +29,13 @@ public class AccountService : IAccountService
         if (hasherResult)
             return _authManager.GenerateToken(user);
         else
-            throw new StatusCodeException(HttpStatusCode.Unauthorized, "Invalid password.");
+            throw new StatusCodeException(HttpStatusCode.BadRequest, "Invalid password.");
     }
 
     public async Task<bool> RegisterAsync(AccountRegisterDto dto)
     {
         var emaildUser = await _repository.Users.FirstOrDefaultAsync(u => u.Email == dto.Email);
-        if(emaildUser is not null)
+        if (emaildUser is not null)
             throw new StatusCodeException(HttpStatusCode.Conflict, "User with this email already exists.");
 
         var hasherResult = PasswordHasher.Hash(dto.Password);
