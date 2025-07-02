@@ -5,16 +5,16 @@ namespace Tourism.Api.Dtos.Accounts;
 
 public class AccountRegisterDto
 {
-    [Required, MaxLength(30), MinLength(2)]
+    [Required, MaxLength(50), MinLength(1)]
     public string FullName { get; set; } = null!;
 
-    [Required, MaxLength(30), MinLength(2)]
+    [Required, MaxLength(50), MinLength(1), EmailAddress]
     public string Email { get; set; } = null!;
 
-    [Required, MinLength(8)]
+    [Required, MinLength(1), ]
     public string Password { get; set; } = String.Empty;
 
-  
+
     public static implicit operator User(AccountRegisterDto dto)
     {
         return new User
