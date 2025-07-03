@@ -40,7 +40,6 @@ public class PaymentService : IPaymentService
 
         _repository.Payments.Add(payment);
         await _repository.SaveChangesAsync();
-
         return payment.Id;
     }
 
