@@ -21,6 +21,7 @@ public class AuthManager : IAuthManager
         var claims = new[]
         {
             new Claim("Id", user.Id.ToString()),
+            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new Claim(ClaimTypes.Email, user.Email),
             new Claim(ClaimTypes.Role, user.Role.ToString()),
         };
