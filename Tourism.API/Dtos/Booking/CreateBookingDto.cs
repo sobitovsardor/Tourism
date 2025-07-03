@@ -4,5 +4,5 @@ public class CreateBookingDto
 {
     public int TourPackageId { get; set; }
 
-    public int NumberOfPeople { get; set; } 
+    public int NumberOfPeople { get; set; }
 }

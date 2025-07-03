@@ -31,7 +31,7 @@ public class BookingService : IBookingService
 
         _repository.Bookings.Add(booking);
         await _repository.SaveChangesAsync();
-        
+
         return booking.Id;
     }
 

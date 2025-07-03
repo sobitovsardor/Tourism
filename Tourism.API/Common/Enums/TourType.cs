@@ -2,9 +2,9 @@
 
 public enum TourType
 {
-    City,
-    Nature,
-    Beach,
-    Cultural,
-    Adventure
+    City = 1,
+    Nature = 2,
+    Beach = 3,
+    Cultural = 4,
+    Adventure = 5
 }
