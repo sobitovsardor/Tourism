@@ -11,7 +11,7 @@ public class AccountRegisterDto
     [Required, MaxLength(50), MinLength(1), EmailAddress]
     public string Email { get; set; } = null!;
 
-    [Required, MinLength(1), ]
+    [Required, MinLength(1),]
     public string Password { get; set; } = String.Empty;
 
 

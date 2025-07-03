@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualStudio.Imaging.Interop;
 using System.Security.Claims;
 using Tourism.Api.Dtos.Booking;
 using Tourism.Api.Interfaces;
@@ -42,6 +40,7 @@ namespace Tourism.Api.Controllers
             var bookings = await _service.GetUserBookingsAsync(userId);
             return Ok(bookings);
         }
+
 
     }
 }
