@@ -25,7 +25,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IAuthManager, AuthManager>();
 builder.Services.AddScoped<ITourService, TourService>();
-
+builder.Services.AddScoped<IBookingService, BookingService>();
 
 //database
 string connectionString = builder.Configuration.GetConnectionString("database")!;
