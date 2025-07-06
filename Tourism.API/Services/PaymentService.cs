@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.PlatformUI;
 using Tourism.Api.Common.DbContexts;
 using Tourism.Api.Dtos.Payment;
 using Tourism.Api.Interfaces;
@@ -46,6 +47,8 @@ public class PaymentService : IPaymentService
     public async Task<PaymentDto?> GetByBookingIdAsync(int bookingId)
     {
         var payment = await _repository.Payments
+            .Include(p => p.Booking)
+            .ThenInclude(b => b.TourPackage)
             .FirstOrDefaultAsync(p => p.BookingId == bookingId);
 
         if (payment is null) return null;
@@ -56,7 +59,8 @@ public class PaymentService : IPaymentService
             BookingId = payment.BookingId,
             Amount = payment.Amount,
             Status = payment.Status,
-            CreatedAt = payment.CreatedAt
+            CreatedAt = payment.CreatedAt,
+            TourTitle = payment.Booking!.TourPackage!.Title
         };
     }
 
@@ -78,4 +82,22 @@ public class PaymentService : IPaymentService
         await _repository.SaveChangesAsync();
         return true;
     }
+
+    public async Task<IEnumerable<PaymentDto>> GetMyPaymentsAsync(int userId)
+    {
+        return await _repository.Payments
+            .Include(p => p.Booking)!.ThenInclude(b => b.TourPackage)
+            .Where(p => p.Booking!.UserId == userId)
+            .Select(p => new PaymentDto
+            {
+                Id = p.Id,
+                BookingId = p.BookingId,
+                Amount = p.Amount,
+                Status = p.Status,
+                CreatedAt = p.CreatedAt,
+                TourTitle = p.Booking!.TourPackage!.Title
+            })
+            .ToListAsync();
+    }
+
 }

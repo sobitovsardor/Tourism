@@ -9,4 +9,6 @@ public interface IReviewService
     public Task<int> CreateAsync(int userId, CreateReviewDto dto);
 
     public Task<bool> DeleteAsync(int reviewId, int userId);
+
+    public Task<IEnumerable<ReviewDto>> GetByUserIdAsync(int userId);
 }

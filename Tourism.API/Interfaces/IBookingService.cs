@@ -7,4 +7,6 @@ public interface IBookingService
     Task<int> CreateAsync(CreateBookingDto dto, int userId);
 
     Task<IEnumerable<BookingDto>> GetUserBookingsAsync(int userId);
+
+    Task<IEnumerable<BookingDto>> GetByUserIdAsync(int userId);
 }

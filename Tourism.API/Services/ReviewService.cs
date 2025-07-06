@@ -68,4 +68,23 @@ public class ReviewService : IReviewService
             })
             .ToListAsync();
     }
+
+    public async Task<IEnumerable<ReviewDto>> GetByUserIdAsync(int userId)
+    {
+        return await _repository.Reviews
+         .Include(r => r.TourPackage)
+         .Include(r => r.User)
+         .Where(r => r.UserId == userId)
+         .Select(r => new ReviewDto
+         {
+             Id = r.Id,
+             TourPackageId = r.TourPackageId,
+             TourTitle = r.TourPackage!.Title,
+             Rating = r.Rating,
+             Comment = r.Comment,
+             UserName = r.User!.FullName,
+             CreatedAt = r.CreatedAt
+         })
+         .ToListAsync();
+    }
 }

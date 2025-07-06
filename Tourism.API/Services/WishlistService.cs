@@ -63,4 +63,21 @@ public class WishlistService : IWishlistService
         await _repository.SaveChangesAsync();
         return true;
     }
+
+    public async Task<IEnumerable<WishlistDto>> GetMyWishlistAsync(int userId)
+    {
+        return await _repository.Wishlists
+            .Include(w => w.TourPackage)
+            .Where(w => w.UserId == userId)
+            .Select(w => new WishlistDto
+            {
+                Id = w.Id,
+                TourPackageId = w.TourPackageId,
+                TourTitle = w.TourPackage!.Title,
+                Location = w.TourPackage.Location,
+                Price = w.TourPackage.Price,
+            })
+            .ToListAsync();
+    }
+
 }

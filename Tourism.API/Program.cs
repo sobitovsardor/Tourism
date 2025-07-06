@@ -1,5 +1,6 @@
 global using System.Net;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 using Tourism.Api.Common.Configurations;
 using Tourism.Api.Common.DbContexts;
 using Tourism.Api.Common.Security;
@@ -21,6 +22,13 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod()
             .AllowAnyHeader());
 });
+
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
+
 
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IAuthManager, AuthManager>();

@@ -9,4 +9,7 @@ public interface IWishlistService
     public Task<int> AddToWishlistAsync(int userId, CreateWishlistDto createWishlistDto);
 
     public Task<bool> RemoveFromWishlistAsync(int id, int userId);
+
+    Task<IEnumerable<WishlistDto>> GetMyWishlistAsync(int userId);
+
 }

@@ -10,4 +10,7 @@ public interface IPaymentService
 
     Task<bool> MarkAsPaidAsync(int paymentId);
 
+    Task<IEnumerable<PaymentDto>> GetMyPaymentsAsync(int userId);
+
+
 }
