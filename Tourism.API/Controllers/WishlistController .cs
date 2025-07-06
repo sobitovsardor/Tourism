@@ -17,15 +17,6 @@ namespace Tourism.Api.Controllers
             this._service = wishlistService;
         }
 
-        [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> GetUserWishlistAsync()
-        {
-            var userId = int.Parse(User.FindFirst("Id")!.Value);
-            var wishlist = await _service.GetUserWishlistAsync(userId);
-            return Ok(wishlist);
-        }
-
 
         [HttpPost]
         [Authorize]
@@ -34,6 +25,16 @@ namespace Tourism.Api.Controllers
             var userId = int.Parse(User.FindFirst("Id")!.Value);
             var id = await _service.AddToWishlistAsync(userId, dto);
             return Ok(id);
+        }
+
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> GetUserWishlistAsync()
+        {
+            var userId = int.Parse(User.FindFirst("Id")!.Value);
+            var wishlist = await _service.GetUserWishlistAsync(userId);
+            return Ok(wishlist);
         }
 
         [HttpDelete("{id}")]
