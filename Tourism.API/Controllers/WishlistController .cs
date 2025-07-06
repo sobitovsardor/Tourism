@@ -26,6 +26,7 @@ namespace Tourism.Api.Controllers
             return Ok(wishlist);
         }
 
+
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> AddToWishlistAsync([FromBody] CreateWishlistDto dto)
