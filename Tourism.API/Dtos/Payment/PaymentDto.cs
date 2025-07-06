@@ -9,4 +9,7 @@ public class PaymentDto
     public decimal Amount { get; set; }
     public PaymentStatus Status { get; set; }
     public DateTime CreatedAt { get; set; }
+
+    public string TourTitle { get; set; } = string.Empty;
+
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Tourism.Api.Models;
 using Tourism.API.Models;
 
 namespace Tourism.Api.Common.DbContexts;
@@ -15,4 +16,5 @@ public class AppDbContext : DbContext
     public DbSet<Booking> Bookings => Set<Booking>();
     public DbSet<Payment> Payments => Set<Payment>();
     public DbSet<Review> Reviews => Set<Review>();
+    public DbSet<Wishlist> Wishlists => Set<Wishlist>();
 }

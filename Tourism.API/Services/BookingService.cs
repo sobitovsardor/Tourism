@@ -43,10 +43,31 @@ public class BookingService : IBookingService
              .Select(b => new BookingDto
              {
                  Id = b.Id,
-                 TourTitle = b.TourPackage!.Title,
+                 BookingDate = b.BookingDate,
                  NumberOfPeople = b.NumberOfPeople,
-                 Status = b.Status.ToString(),
-                 BookingDate = b.BookingDate
+                 BookingStatus = b.Status,
+                 TourTitle = b.TourPackage!.Title,
+                 Price = b.TourPackage.Price,
+                 Location = b.TourPackage.Location
              }).ToListAsync();
+    }
+
+
+    public async Task<IEnumerable<BookingDto>> GetByUserIdAsync(int userId)
+    {
+        return await _repository.Bookings
+       .Where(b => b.UserId == userId)
+       .Include(b => b.TourPackage)
+       .Select(b => new BookingDto
+       {
+           Id = b.Id,
+           BookingDate = b.BookingDate,
+           NumberOfPeople = b.NumberOfPeople,
+           BookingStatus = b.Status,
+           TourTitle = b.TourPackage!.Title,
+           Price = b.TourPackage.Price,
+           Location = b.TourPackage.Location
+       })
+       .ToListAsync();
     }
 }

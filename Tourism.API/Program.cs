@@ -1,5 +1,6 @@
 global using System.Net;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 using Tourism.Api.Common.Configurations;
 using Tourism.Api.Common.DbContexts;
 using Tourism.Api.Common.Security;
@@ -22,12 +23,20 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader());
 });
 
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
+
+
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IAuthManager, AuthManager>();
 builder.Services.AddScoped<ITourService, TourService>();
 builder.Services.AddScoped<IBookingService, BookingService>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
+builder.Services.AddScoped<IWishlistService, WishlistService>();    
 
 //database
 string connectionString = builder.Configuration.GetConnectionString("database")!;
