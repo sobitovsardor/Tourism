@@ -22,8 +22,8 @@ public class ReviewService : IReviewService
              .AnyAsync(b => b.UserId == userId &&
                             b.TourPackageId == dto.TourPackageId &&
                             b.Status == BookingStatus.Confirmed);
-        
-        if (!hasBooked) 
+
+        if (!hasBooked)
             throw new Exception("Siz bu turga izoh qoldira olmaysiz (bron yo‘q).");
 
         var review = new Review

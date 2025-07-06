@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Policy;
 using Tourism.Api.Dtos.Review;
 using Tourism.Api.Interfaces;
-using static Microsoft.VisualStudio.Utilities.UnifiedSettings.ExternalSettingOperationResult;
 
 namespace Tourism.Api.Controllers
 {
@@ -21,7 +19,7 @@ namespace Tourism.Api.Controllers
         [HttpGet("tour/{tourId}")]
         public async Task<IActionResult> GetByTourIdAsync(int tourId)
             => Ok(await _service.GetByTourIdAsync(tourId));
-        
+
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> CreateAsync([FromBody] CreateReviewDto dto)

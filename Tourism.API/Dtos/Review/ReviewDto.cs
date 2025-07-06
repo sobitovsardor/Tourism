@@ -8,9 +8,9 @@ public class ReviewDto
 
     public int TourPackageId { get; set; }
 
-    public int Rating { get; set; } 
+    public int Rating { get; set; }
 
     public string Comment { get; set; } = string.Empty;
 
-    public DateTime CreatedAt { get; set; } 
+    public DateTime CreatedAt { get; set; }
 }
