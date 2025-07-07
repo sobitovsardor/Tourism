@@ -16,12 +16,15 @@ builder.Services.ConfigureSwaggerAuthorize();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowFrontend",
-        policy => policy
-            .AllowAnyOrigin()
-            .AllowAnyMethod()
-            .AllowAnyHeader());
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins("http://localhost:3000") 
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
+    });
 });
+
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
@@ -37,6 +40,9 @@ builder.Services.AddScoped<IBookingService, BookingService>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
 builder.Services.AddScoped<IWishlistService, WishlistService>();    
+builder.Services.AddScoped<IAdminUserService, AdminUserService>();
+builder.Services.AddScoped<IAdminStatisticsService, AdminStatisticsService>();
+
 
 //database
 string connectionString = builder.Configuration.GetConnectionString("database")!;

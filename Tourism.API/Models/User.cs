@@ -1,4 +1,5 @@
-﻿using Tourism.API.Common.Enums;
+﻿using Tourism.Api.Models;
+using Tourism.API.Common.Enums;
 
 namespace Tourism.API.Models;
 
@@ -16,4 +17,6 @@ public class User
 
     public ICollection<Booking>? Bookings { get; set; }
     public ICollection<Review>? Reviews { get; set; }
+    public ICollection<Wishlist>? Wishlist { get; set; }
+
 }
