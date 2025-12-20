@@ -47,6 +47,7 @@ builder.Services.AddScoped<IAdminStatisticsService, AdminStatisticsService>();
 //database
 string connectionString = builder.Configuration.GetConnectionString("database")!;
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connectionString));
+builder.Services.AddApplicationInsightsTelemetry();
 
 
 // Middleware

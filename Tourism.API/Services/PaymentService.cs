@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.PlatformUI;
 using Tourism.Api.Common.DbContexts;
 using Tourism.Api.Dtos.Payment;
 using Tourism.Api.Interfaces;
@@ -26,9 +25,9 @@ public class PaymentService : IPaymentService
         if (booking == null)
             throw new Exception("Booking topilmadi");
 
-        var exciting = await _repository.Payments
+        var existing = await _repository.Payments
             .FirstOrDefaultAsync(p => p.BookingId == dto.BookingId);
-        if (exciting != null)
+        if (existing != null)
             throw new Exception("Bu booking uchun to'lov allaqachon mavjud");
 
         var payment = new Payment
@@ -48,7 +47,7 @@ public class PaymentService : IPaymentService
     {
         var payment = await _repository.Payments
             .Include(p => p.Booking)
-            .ThenInclude(b => b.TourPackage)
+            .ThenInclude(b => b!.TourPackage)
             .FirstOrDefaultAsync(p => p.BookingId == bookingId);
 
         if (payment is null) return null;
@@ -87,7 +86,7 @@ public class PaymentService : IPaymentService
     public async Task<IEnumerable<PaymentDto>> GetMyPaymentsAsync(int userId)
     {
         return await _repository.Payments
-            .Include(p => p.Booking)!.ThenInclude(b => b.TourPackage)
+            .Include(p => p.Booking)!.ThenInclude(b => b!.TourPackage)
             .Where(p => p.Booking!.UserId == userId)
             .Select(p => new PaymentDto
             {

@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Data;
 using Tourism.Api.Common.DbContexts;
 using Tourism.Api.Dtos.Admin;
 using Tourism.Api.Interfaces;
@@ -88,11 +87,8 @@ public class AdminUserService : IAdminUserService
 
         if (user == null) return false;
 
-        if (user.Bookings != null)
-            _repository.Bookings.RemoveRange(user.Bookings);
-
-        if (user.Reviews != null)
-            _repository.Reviews.RemoveRange(user.Reviews);
+        _repository.Bookings.RemoveRange(user.Bookings);
+        _repository.Reviews.RemoveRange(user.Reviews);
 
         _repository.Users.Remove(user);
         await _repository.SaveChangesAsync();
